@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <Target Name="_Before_GenerateJavaStubs" BeforeTargets="_GenerateJavaStubs">
+
+    <ItemGroup>
+      <_Proxy_ExtractedManifestDocuments Include="@(ExtractedManifestDocuments)" />
+      <ExtractedManifestDocuments Remove="@(ExtractedManifestDocuments)" />
+    </ItemGroup>
+
+  </Target>
+
+  <Target Name="_After_GenerateJavaStubs" AfterTargets="_GenerateJavaStubs"
+          Inputs="$(IntermediateOutputPath)android\AndroidManifest.xml;@(_Proxy_ExtractedManifestDocuments)"
+          Outputs="$(_AndroidStampDirectory)_After_GenerateJavaStubs.stamp">
+
+    <ItemGroup>
+      <_MergerJar Include="$(MSBuildThisFileDirectory)\*.jar" />
+    </ItemGroup>
+
+    <Exec Command="java -cp @(_MergerJar) com.android.manifmerger.Merger --main $(IntermediateOutputPath)android\AndroidManifest.xml --libs @(_Proxy_ExtractedManifestDocuments) --out $(IntermediateOutputPath)android\AndroidManifest.xml" />
+
+    <Touch Files="$(_AndroidStampDirectory)_GenerateJavaStubs.stamp;@(_TypeMapAssemblySource);$(_AndroidStampDirectory)_After_GenerateJavaStubs.stamp" AlwaysCreate="True" />
+
+  </Target>
+
+</Project>
