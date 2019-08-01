@@ -15,8 +15,8 @@
     <tags>Xamarin Xamarin.Android</tags>
   </metadata>
   <files>
-    <file src="*.jar" target="build\monoandroid" />
-    <file src="*.targets" target="build\monoandroid" />
+    <file src="*.jar" target="build/monoandroid" />
+    <file src="*.targets" target="build/monoandroid" />
     <file src="..\LICENSE" target="LICENSE" />
     <file src="..\External-Dependency-Info.txt" target="THIRD-PARTY-NOTICES.txt" />
   </files>
