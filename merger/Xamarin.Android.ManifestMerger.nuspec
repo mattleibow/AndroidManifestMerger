@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>Xamarin.Android.ManifestMerger</id>
+    <version>1.0.0-preview01</version>
+    <licenseUrl>https://github.com/mattleibow/AndroidManifestMerger/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/mattleibow/AndroidManifestMerger</projectUrl>
+    <!-- <iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl> -->
+    <description>A set of tools and MSBuild tasks to merge several AndroidManifest.xml files.</description>
+    <!-- <releaseNotes>Summary of changes made in this release of the package.</releaseNotes> -->
+    <authors>Microsoft</authors>
+    <owners>Microsoft</owners>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <copyright>© Microsoft Corporation. All rights reserved.</copyright>
+    <tags>Xamarin Xamarin.Android</tags>
+  </metadata>
+  <files>
+    <file src="*.jar" target="build\monoandroid" />
+    <file src="*.targets" target="build\monoandroid" />
+    <file src="..\LICENSE" target="LICENSE" />
+    <file src="..\External-Dependency-Info.txt" target="THIRD-PARTY-NOTICES.txt" />
+  </files>
+</package>
