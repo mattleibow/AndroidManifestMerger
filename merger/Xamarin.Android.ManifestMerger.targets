@@ -16,11 +16,16 @@
           Outputs="$(_AndroidStampDirectory)_After_GenerateJavaStubs.stamp"
           Condition="'$(SkipExternalGoogleManifestMerge)' != 'true'">
 
+    <PropertyGroup>
+      <_MergerJavaPath Condition="'$(_MergerJavaPath)' == '' and '$(OS)' == 'Unix'">$(JavaSdkDirectory)\bin\java</_MergerJavaPath>
+      <_MergerJavaPath Condition="'$(_MergerJavaPath)' == '' and '$(OS)' != 'Unix'">$(JavaSdkDirectory)\bin\java.exe</_MergerJavaPath>
+    </PropertyGroup>
+
     <ItemGroup>
       <_MergerJar Include="$(MSBuildThisFileDirectory)\*.jar" />
     </ItemGroup>
 
-    <Exec Command="java -cp @(_MergerJar) com.android.manifmerger.Merger --main $(IntermediateOutputPath)android\AndroidManifest.xml --libs @(_Proxy_ExtractedManifestDocuments) --out $(IntermediateOutputPath)android\AndroidManifest.xml" />
+    <Exec Command="&quot;$(_MergerJavaPath)&quot; -cp &quot;@(_MergerJar)&quot; &quot;com.android.manifmerger.Merger&quot; --main &quot;$(IntermediateOutputPath)android\AndroidManifest.xml&quot; --libs &quot;@(_Proxy_ExtractedManifestDocuments)&quot; --out &quot;$(IntermediateOutputPath)android\AndroidManifest.xml&quot;" />
 
     <Touch Files="$(_AndroidStampDirectory)_GenerateJavaStubs.stamp;@(_TypeMapAssemblySource);$(_AndroidStampDirectory)_After_GenerateJavaStubs.stamp" AlwaysCreate="True" />
 
